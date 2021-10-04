@@ -121,9 +121,9 @@ filtered1 = data1[
     (data1[DATE_TIME].dt.hour >= hour_selected) & (data1[DATE_TIME].dt.hour < (hour_selected + 1))
     ]
 
-hist = np.histogram(filtered1[DATE_TIME].dt.minute, bins=24, range=(0, 23))[0]
+hist = np.histogram(filtered1[DATE_TIME].dt.minute, bins=60, range=(0, 60))[0]
 
-chart_data = pd.DataFrame({"minute": range(24), "Number of travelling (start)": hist})
+chart_data = pd.DataFrame({"minute": range(60), "Number of travelling (start)": hist})
 
 # LAYING OUT THE HISTOGRAM SECTION
 
