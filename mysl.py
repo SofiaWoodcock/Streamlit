@@ -1,4 +1,3 @@
-%%writefile streamlit_app.py
 # -*- coding: utf-8 -*-
 # Copyright 2018-2019 Streamlit Inc.
 #
