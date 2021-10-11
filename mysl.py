@@ -32,7 +32,7 @@ row1_1, row1_2 = st.columns((1,1))
 
 with row1_1:
     st.title("Number of Started Data in January 2019 (Date 1-5)")
-    date_selected = st.date_input('start date')
+    date_selected = st.selectbox("Date of January,2019",("1", "2","3","4","5"))
     hour_selected = st.slider("Select hour", 0, 23)
     
 if date_selected == "1" :
