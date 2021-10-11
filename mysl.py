@@ -24,6 +24,9 @@ import pydeck as pdk
 # SETTING PAGE CONFIG TO WIDE MODE
 st.set_page_config(layout="wide")
 
+# LOADING DATA
+DATE_TIME = "date/time"
+
 # LAYING OUT THE TOP SECTION OF THE APP
 row1_1, row1_2 = st.columns((1,1))
 
@@ -31,9 +34,6 @@ with row1_1:
     st.title("Number of Started Data in January 2019 (Date 1-5)")
     date_selected = st.selectbox("Date of January,2019",("1", "2","3","4","5"))
     hour_selected = st.slider("Select hour", 0, 23)
-
-# LOADING DATA
-DATE_TIME = "date/time"
 
 if date_selected == "1" :
   DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190101.csv")
@@ -50,7 +50,7 @@ elif date_selected == "5" :
 def load_data(nrows):
     data = pd.read_csv(DATA_URL, nrows=nrows)
     data = data[['timestart','latstartl','lonstartl']].copy()
-    data = data.rename(columns = {'timestart': 'Date/Time'}, inplace = False)
+    data = data.rename(columns = {'timestart': 'date/time'}, inplace = False)
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis="columns", inplace=True)
     data[DATE_TIME] = pd.to_datetime(data[DATE_TIME])
