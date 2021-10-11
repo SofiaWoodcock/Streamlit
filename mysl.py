@@ -112,7 +112,7 @@ with row2_2:
 
 # FILTERING DATA FOR THE HISTOGRAM
 filtered1 = data[
-    (data[DATE_TIME].dt.hour >= hour_selected) & (data1[DATE_TIME].dt.hour < (hour_selected + 1))
+    (data[DATE_TIME].dt.hour >= hour_selected) & (data[DATE_TIME].dt.hour < (hour_selected + 1))
     ]
 
 hist = np.histogram(filtered1[DATE_TIME].dt.minute, bins=60, range=(0, 60))[0]
