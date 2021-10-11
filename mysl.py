@@ -107,7 +107,7 @@ with row2_1:
     map(data, midpoint[0], midpoint[1], 12)
     
 with row2_2:
-    st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 3) % 8))
+    st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 3) % 24))
     map(data, midpoint[0], midpoint[1], 12)
 
 # FILTERING DATA FOR THE HISTOGRAM
@@ -123,15 +123,15 @@ chart_data = pd.DataFrame({"minute": range(60), "Number of travelling (start)": 
 
 st.write("")
 
-st.write("** travelling (start) per minute between %i:00 and %i:00**" % (hour_selected, (hour_selected + 3) % 8))
+st.write("** travelling (start) per minute between %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
 
 st.altair_chart(alt.Chart(chart_data)
     .mark_area(
         interpolate='step-after',
     ).encode(
-        x=alt.X("hour:Q", scale=alt.Scale(nice=False)),
+        x=alt.X("minute:Q", scale=alt.Scale(nice=False)),
         y=alt.Y("Number of travelling (start):Q"),
-        tooltip=['hour', 'Number of travelling (start)']
+        tooltip=['minute', 'Number of travelling (start)']
     ).configure_mark(
         opacity=0.4,
         color='blue'
