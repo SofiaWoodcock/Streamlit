@@ -96,7 +96,7 @@ with row1_2:
 data1 = data1[(data1[DATE_TIME].dt.hour == hour_selected)]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-row2_1 = st.columns(1)
+row2_1, row2_2 = st.columns(2)
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 zoom_level = 12
@@ -104,6 +104,10 @@ midpoint = [13.7563, 100.5018]
 
 with row2_1:
     st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
+    map(data1, midpoint[0], midpoint[1], 12)
+    
+with row2_2:
+    st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 3) % 24))
     map(data1, midpoint[0], midpoint[1], 12)
 
 # FILTERING DATA FOR THE HISTOGRAM
