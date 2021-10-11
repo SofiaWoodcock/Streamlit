@@ -25,7 +25,7 @@ import pydeck as pdk
 st.set_page_config(layout="wide")
 
 # LAYING OUT THE TOP SECTION OF THE APP
-row1_1, row1_2 = st.columns(2)
+row1_1, row1_2 = st.columns((1,1))
 
 with row1_1:
     st.title("Number of Started Data in January 2019 (Date 1-5)")
@@ -56,7 +56,7 @@ def load_data(nrows):
     data[DATE_TIME] = pd.to_datetime(data[DATE_TIME])
     return data
 
-data1 = load_data(100000)
+data = load_data(100000)
 
 # CREATING FUNCTION FOR MAPS
 
@@ -93,10 +93,10 @@ with row1_2:
     """)
     
 # FILTERING DATA BY HOUR SELECTED
-data1 = data1[(data1[DATE_TIME].dt.hour == hour_selected)]
+data = data[(data[DATE_TIME].dt.hour == hour_selected)]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-row2_1, row2_2 = st.columns(2)
+row2_1, row2_2 = st.columns((1,1))
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 zoom_level = 12
@@ -104,15 +104,15 @@ midpoint = [13.7563, 100.5018]
 
 with row2_1:
     st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
-    map(data1, midpoint[0], midpoint[1], 12)
+    map(data, midpoint[0], midpoint[1], 12)
     
 with row2_2:
     st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 3) % 24))
-    map(data1, midpoint[0], midpoint[1], 12)
+    map(data, midpoint[0], midpoint[1], 12)
 
 # FILTERING DATA FOR THE HISTOGRAM
-filtered1 = data1[
-    (data1[DATE_TIME].dt.hour >= hour_selected) & (data1[DATE_TIME].dt.hour < (hour_selected + 1))
+filtered1 = data[
+    (data[DATE_TIME].dt.hour >= hour_selected) & (data1[DATE_TIME].dt.hour < (hour_selected + 1))
     ]
 
 hist = np.histogram(filtered1[DATE_TIME].dt.minute, bins=60, range=(0, 60))[0]
