@@ -28,38 +28,23 @@ st.set_page_config(layout="wide")
 row1_1, row1_2 = st.columns(2)
 
 with row1_1:
-    st.title("Number of Travelling Started Data in January 2019 (Date 1-5)")
+    st.title("Number of Started Data in January 2019 (Date 1-5)")
     date_selected = st.selectbox("Date of January,2019",("1", "2","3","4","5"))
     hour_selected = st.slider("Select hour", 0, 23)
-
-with row1_2:
-    st.write(
-    """
-    ##
-    Examining the number of travelling started for near Bangkok area .
-    By sliding the slider on the left and selecting date you can view different slices of date and time and explore different transportation trends.
-    by Audcharapan Woodcock 6130834821
-    """)
 
 # LOADING DATA
 DATE_TIME = "date/time"
 
-D1 = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190101.csv")
-D2 = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190102.csv")
-D3 = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190103.csv")
-D4 = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190104.csv")
-D5 = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190105.csv")
-
 if date_selected == "1" :
-  DATA_URL = D1
+  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190101.csv")
 elif date_selected == "2" :
-  DATA_URL = D2
+  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190102.csv")
 elif date_selected == "3" :
-  DATA_URL = D3
+  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190103.csv")
 elif date_selected == "4" :
-  DATA_URL = D4
+  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190104.csv")
 elif date_selected == "5" :
-  DATA_URL = D5
+  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190105.csv")
 
 @st.cache(persist=True)
 def load_data(nrows):
@@ -98,11 +83,20 @@ def map(data, latstartl, lonstartl, zoom):
         ]
     ))
 
+with row1_2:
+    st.write(
+    """
+    ##
+    Examining the number of started for near Bangkok area .
+    By sliding the slider on the left and you can view different slices of date and time and explore different transportation trends.
+    by Audcharapan Woodcock 6130834821
+    """)
+    
 # FILTERING DATA BY HOUR SELECTED
 data1 = data1[(data1[DATE_TIME].dt.hour == hour_selected)]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-row2_1, row2_2 = st.columns(2)
+row2_1 = st.columns(1)
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 zoom_level = 12
@@ -110,10 +104,6 @@ midpoint = [13.7563, 100.5018]
 
 with row2_1:
     st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
-    map(data1, midpoint[0], midpoint[1], 12)
-
-with row2_2:
-    st.write("**All started from %i:00 and %i:00**" % (hour_selected, (hour_selected + 3) % 24))
     map(data1, midpoint[0], midpoint[1], 12)
 
 # FILTERING DATA FOR THE HISTOGRAM
