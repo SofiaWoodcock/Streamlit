@@ -29,21 +29,21 @@ DATE_TIME = "date/time"
 
 # LAYING OUT THE TOP SECTION OF THE APP
 row1_1, row1_2 = st.columns((1,1))
-
+# ต้องเอาบรรทัดนี้ขึ้นมาไว้ข้างบนไม่งั้นรันแล้วเออเร่อ เพราะไม่มีข้อมูลของ DATA_URL ป้อนใน data ของ loop ต่อไป
 with row1_1:
     st.title("Number of Started Data in January 2019 (Date 1-5)")
     hour_selected = st.slider("Select hour", 0, 23)
     DATA_URL = ''    
     date_selected = st.selectbox("Date of January,2019",range(1,6),0)
-    if date_selected == "1" :
+    if date_selected == 1 :
         DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190101.csv")
-    elif date_selected == "2" :
+    elif date_selected == 2 :
         DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190102.csv")
-    elif date_selected == "3" :
+    elif date_selected == 3 :
         DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190103.csv")
-    elif date_selected == "4" :
+    elif date_selected == 4 :
         DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190104.csv")
-    elif date_selected == "5" :
+    elif date_selected == 5 :
         DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190105.csv")
 
 @st.cache(persist=True)
