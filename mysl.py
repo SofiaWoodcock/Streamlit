@@ -32,19 +32,19 @@ row1_1, row1_2 = st.columns((1,1))
 
 with row1_1:
     st.title("Number of Started Data in January 2019 (Date 1-5)")
-    date_selected = st.selectbox("Date of January,2019",("1", "2","3","4","5"))
     hour_selected = st.slider("Select hour", 0, 23)
-    
-if date_selected == "1" :
-  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190101.csv")
-elif date_selected == "2" :
-  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190102.csv")
-elif date_selected == "3" :
-  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190103.csv")
-elif date_selected == "4" :
-  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190104.csv")
-elif date_selected == "5" :
-  DATA_URL = ("https://raw.githubusercontent.com/Maplub/odsample/master/20190105.csv")
+    DATA_URL = ''    
+    date_selected = st.selectbox("Date of January,2019",range(1,6),0)
+    if date_selected == "1" :
+        DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190101.csv")
+    elif date_selected == "2" :
+        DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190102.csv")
+    elif date_selected == "3" :
+        DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190103.csv")
+    elif date_selected == "4" :
+        DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190104.csv")
+    elif date_selected == "5" :
+        DATA_URL = pd.read_csv("https://raw.githubusercontent.com/Maplub/odsample/master/20190105.csv")
 
 @st.cache(persist=True)
 def load_data(nrows):
